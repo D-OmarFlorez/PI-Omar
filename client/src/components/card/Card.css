@@ -1,0 +1,89 @@
+.card:hover{
+    box-shadow: 0 15 35px #00ffff;
+   }
+.card{
+    font-family: "fuente", Arial, Helvetica, sans-serif;
+    background: radial-gradient(center, red, yellow) ;
+
+}
+.carta{
+  color: hsl(309, 26%, 95%) ;
+  background-color: rgb(0, 0, 0, 0.8);
+  font-size:medium;
+}
+.cartaJpg{
+    width: 200px;
+    height: auto;
+}
+.overlay{
+    position: 'fixed';
+     top: 0; 
+     left: 0; 
+     right: 0; 
+     bottom: 0;
+     background-Color: 'rgba(0,0,0,0.5)';
+     /* animation: expand .5s ease-in-out forwards;  */
+}
+.nombredetalle{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: '50px';
+    border-radius: '25px';
+    background: 'linear-gradient(to right, #ff7e5f';
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #fff;
+    border:'3px' green ;
+    font-size: '35px';
+    box-shadow: 'o 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)';
+}   
+.background{
+    width: '300px';
+    height: '200px';
+    background-image: url('https://i.pinimg.com/originals/6f/01/d5/6f01d505e6f3bc090ce9874aa72ff2a0.gif');
+    background-color: rgba(255, 255, 255, 0.5);
+    background-blend-mode: lighten;
+    background-size: cover;
+    border-radius: 20px;
+}
+.contenedore {
+    position: relative;
+    width: 110%; /* Ajusta el ancho según tus necesidades */
+    height: 340px;
+    background-color: white;
+    border-top: 5px solid #03e9f4;
+    border-right: 15px solid #03e9f4;
+    border-bottom: 10px solid deep black;
+    padding: 5px;
+    animation: moveLine 4s linear infinite; /* Ajusta la altura según tus necesidades */
+    border: 2px solid transparent; /* Borde transparente */
+    overflow: hidden;
+  }
+  @keyframes moveLine {
+    0% {
+      background: linear-gradient(90deg, transparent, #00ffff) 0 0;
+    }
+    100% {
+      background: linear-gradient(90deg, transparent, #00ffff) 100% 0;
+    }
+  }
+  
+  
+  /* Define la animación */
+  @keyframes borderAnimation {
+    0% {
+      border-image-source: linear-gradient(90deg, transparent, #03e9f4);
+    }
+    100% {
+      border-image-source: linear-gradient(90deg, transparent, #03e9f4);
+      background-position: 100% 0;
+    }
+  }
+  
+  /* Aplica la animación al borde de la tarjeta */
+  .contenedor {
+    animation: borderAnimation 4s linear infinite; /* Ajusta la duración según tus necesidades */
+    border-image-slice: 1;
+    border-image-repeat: round;
+    border-image-width: 2px; /* Grosor de la línea */
+  }

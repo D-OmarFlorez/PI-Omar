@@ -27,13 +27,12 @@ module.exports= ( async (req, res)=>{
     });
     videogames.push(...dbVideogames);
 
-    if (videogames.length < 15){
-        const faltan = 15-videogames.length
-    const response = await axios.get (`https://api.rawg.io/api/games?key=bf3907b002f9450c8a1ae32f7f532d03&search=${name}&page_size=${faltan}`)
-     const apiVideogames = [response.data];
+    
+    const response = await axios.get (`https://api.rawg.io/api/games?key=bf3907b002f9450c8a1ae32f7f532d03&search=${name}`)
+     const apiVideogames = [response.data.results];
      videogames.push(...apiVideogames)
      
-    }
+    
     if( videogames.length > 0){
         res.json(videogames);
     }else{

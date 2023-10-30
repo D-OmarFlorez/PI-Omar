@@ -1,13 +1,15 @@
 const {Videogame}=require('../db')
 
 module.exports=(async(req, res)=>{
-    const Id = req.params.id;
-    try{
-        const videogames = await Videogame.findByPk(Id);
+    const {idVideogame} = req.params;
 
-        if (!videogame){
+    try{
+        const videogames = await Videogame.findByPk(idVideogame);
+       
+        if (!videogames){
             return res.status(404).json({error:'the game required not exists'})
         }
+     
         await videogames.destroy();
         res.json({sucess: 'videojuego eliminado con exito, igual, era una basura xd'})
     }catch(error){

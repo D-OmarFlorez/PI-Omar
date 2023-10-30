@@ -3,7 +3,7 @@ import {
     REMOVE_FAV,
     GENRE,
     
-} from "./action-types"
+} from "./ActionsType"
 
 export const addFavGame = (character) => {
     return { type: ADD_FAV, payload: character }

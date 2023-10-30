@@ -10,6 +10,7 @@ const GendersToDb = require('../controllers/Getgender.js');
 const CreateGame = require ( '../controllers/PostVideogame.js')
 const GetId = require('../controllers/GetId.js')
 const deleteGame = require('../controllers/DeleteGame.js')
+const UpdateGame = require ('../controllers/UpdateVideogame.js')
 //const {API_KEY} = process.env
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
@@ -34,7 +35,9 @@ router.get('/videogames/:idVideogame', GetId)
 
 router.post ( '/videogames', CreateGame)
 
-router.delete ('/videogames', deleteGame)
+router.delete ('/videogames/:idVideogame', deleteGame)
+
+router.put('/videogames/:idVideogame', UpdateGame)
 //show games by primary key
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);

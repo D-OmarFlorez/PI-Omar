@@ -1,0 +1,81 @@
+@font-face {
+  font-family: 'PressStart2';
+  src: url(../estilos/PressStart2P-Regular.ttf) format('truetype');
+}
+
+.carousel {
+    width: 100%;
+    overflow: hidden;
+   display: flex;
+   padding-left: 630px;
+    justify-content: right;
+}
+.container{
+  position: relative;
+  background-color: #000;
+  border: 3px solid #08f;
+  box-shadow: 0 0 10px #08f, 0 0 20px #08f, 0 0 30px #08f, 0 0 40px #08f;
+  border-radius: 10px;
+  box-shadow: 3px 3px #888888;
+  background-image: url('');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.carrusel:hover {
+  box-shadow: 0 0 20px rgb(0, 230, 42), 0 0 30px rgb(0, 187, 255), 0 0 40px rgb(0, 255, 153), 0 0 50px rgb(0, 255, 64), 0 0 60px rgb(0, 255, 30);
+}
+.carousel img {
+    width: 300px;
+    height: 200px;
+    padding-left: 10px;
+    animation: slide 6s ease-in-out infinite;
+
+}
+.carrusel{
+    display: flexbox;
+    width: 300px;
+    padding-left: 20%;
+    justify-content: center;
+    float: center;
+    position: relative;
+
+}
+  
+  .main-image {
+    width: 50%;
+  
+    animation: fade 4s ease-in-out infinite
+  }
+  @keyframes fade {
+    0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+
+    
+  }
+  
+  
+  .side-image {
+    width: 25%;
+    opacity: 0.6;
+  }
+  .slide {
+    animation: slide 5s infinite;
+    transition: transform 3s;
+  }
+  @keyframes slide {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+  }
+
+  .game-info {
+    position: relative;
+}
+
+.game-details {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: rgb(34, 224, 0); 
+    background-color: rgba(0, 0, 0, 1); 
+}
