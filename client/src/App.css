@@ -5,3 +5,75 @@
   text-align: center;
 }
 
+.updatediv{
+  background-color: black;
+  background-image: -moz-linear-gradient rgba(85, 8, 230, 0.8);
+  align-items: center;
+  justify-content:left;
+  float: center;
+  height: 600px;
+
+  padding: 20px;
+  border: 5px solid ;
+  background-image: url('https://i.pinimg.com/originals/00/ef/a6/00efa61325c17584d2c7ecee8bfbd0fb.gif'); 
+  background-size: cover;
+  background-position: center; 
+  background-color: rgba(71, 221, 248, 0.5);
+  background-color: rgba(rgb(71, 221, 248), rgb(113, 115, 247), rgb(251, 145, 158), 0,5);
+  border-radius: 30px;
+  transform: translate(-50%, -50%);
+  box-shadow: 20 20 10px rgba(black, green, blue, 0.5);
+  border-image: linear-gradient(to top, rgb(181, 1, 1), rgb(14, 7, 142), rgb(193, 213, 9)) 3;
+}
+.containerup{
+  align-items: center;
+  align-content: center;
+  padding-left: 500px;
+  display: grid;
+  width: 50%;
+  padding-top: 150px;
+  height: 340px;
+
+  place-items: center;
+}
+.imagenDb{
+  height: 300px;
+  width: auto;
+}
+.close-button {
+  position: relative;
+  width: 30px;
+  padding-left: 20px;
+  padding-top: 20px;
+  height: 30px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.close-button:before, .close-button:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 22px;
+  width: 6px;
+  height: 50px;
+  background-color: #a4a4a4;
+}
+
+.close-button:before {
+  transform: rotate(45deg);
+}
+
+.close-button:after {
+  transform: rotate(-45deg);
+}
+
+.close-button:hover:before, .close-button:hover:after {
+  background-color: #f00;
+}
+
+.close-button:focus {
+  outline: none;
+}

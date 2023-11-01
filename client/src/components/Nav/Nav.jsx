@@ -3,10 +3,11 @@ import { useState } from "react";
 import React from "react";
 import {Link, useNavigate} from "react-router-dom"
 import axios from "axios"
+import './nav.css'
 /**components */
 import PostForm from "../post/Post";
 
-const Nav =({onSearch, limpiarHome, mostrarAbout}) =>{
+const Nav =({onSearch, limpiarHome, mostrarAbout, getGames}) =>{
 
     const [confirm, setConfirm] = useState (false);
     const [randomGame, setRandomGame] = useState(null);
@@ -26,6 +27,9 @@ const Nav =({onSearch, limpiarHome, mostrarAbout}) =>{
     const handleShowForm=()=>{
         setShowForm(!showForm)
     }
+    const principal = ()=>{
+        navigate('/home')
+    }
 
     const random = async ()=>{
     try{
@@ -42,11 +46,12 @@ const Nav =({onSearch, limpiarHome, mostrarAbout}) =>{
     }
 }
 return(
-    <div>
-        <nav>
+    <div>    <div>
+        <nav className="navBar">
         <button onClick={logoutClick}>
             Pagina Principal
         </button>
+        <button onClick={principal}>volver a inicio</button>
         {confirm&&(
             <div onClick={salirConfirm} style={{borderRadius:"30px", position: 'fixed',color:'black', top: '30%', left: '50%', right: 0,width:'50%', height:'20%', bottom: 0, backgroundColor: 'rgba(225,275,214,0.9)', transform:"translate(-50%, -50%)", overflow:"auto", border:" 4px solid black"}}>
                 <p>!seguro que quieres salir?</p>
@@ -56,23 +61,21 @@ return(
         <button onClick={handleShowForm}>
             {showForm ? 'crea un juego!' : 'crea un juego!'}
         </button>
-        <button onClick={limpiarHome}></button>
+        <button onClick={getGames}>MyGames</button>
+        <button onClick={limpiarHome}>limpiar todo</button>
       <SearchBar onSearch={onSearch}/>
         </nav>
-        {showForm && (<div style={{ 
-        position: 'fixed',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          backgroundColor: '#fff',
-          padding: '20px',
-          borderRadius: '10px',
-          boxShadow: '0px 0px 10px rgba(0,0,0,0.1)'}}>
+        {showForm && (
+            
+        <div className="form" >
             
         <PostForm/>
+        <button onClick={handleShowForm} className="close-button"></button>
+
         </div>
         )}
          
+         </div>
 
     </div>
 )

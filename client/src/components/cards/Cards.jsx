@@ -1,17 +1,15 @@
 import Card from "../card/Card";
 import "./Cards.css"
 // import {randomCharacter} from '../nav/Nav'
-const Cards = ({ Videogames, onClose, onCardClick, randomGame, showCloseButton}) => {
+const Cards = ({ Videogames, onClose, onCardClick, randomGame, showCloseButton, deleteGame}) => {
    Videogames = Array.isArray(Videogames) ? Videogames : [];
    Videogames.flat()
-   console.log(Videogames);
+   console.log(deleteGame)
    return(
-      
       <div className="cabecera">
          {Videogames?.map((videogame, index)=>{
            if (!videogame) return null;
            const key = videogame.id? videogame.id: `random-${index}`
-           console.log(videogame.background_image)
             return(
                <div className="cuerpo" key={key}>
                  {showCloseButton && (
@@ -27,6 +25,7 @@ const Cards = ({ Videogames, onClose, onCardClick, randomGame, showCloseButton})
                videogame={videogame}
                onClose={onClose}
                onCardClick={onCardClick}
+               deleteGame={deleteGame}
                
                
             />

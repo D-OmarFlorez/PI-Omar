@@ -25,7 +25,6 @@ const manejarCarga = () => {
     useEffect(()=>{
         axios(`http://localhost:3001/videogames`)
         .then (response=>{
-        console.log();
             setGames(response.data);
         })
         .catch(error => {throw Error (error,'error')})

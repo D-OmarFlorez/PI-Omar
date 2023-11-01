@@ -1,0 +1,59 @@
+@font-face {
+    font-family: 'Munsteria';
+    src: url(../estilos/Munsteria.ttf) format('truetype');
+  }
+.divGeneral {
+    justify-content: left;
+    position: relative;
+    float: left;
+    height: 40px;
+    margin-bottom: 20px;
+    bottom: 20px;
+    padding: 10px;
+    
+}
+.labelGeneral {
+    align-content: center;
+    font-family: 'Munsteria', Georgia, 'Times New Roman', Times, serif;
+    justify-content: center;
+    
+    height: auto;
+    bottom: 20px;
+    align-items: center;
+
+}
+.form{
+   z-index: 1;
+   width: 400px;
+   height: 500px;
+}
+.formControl{
+    width: 50%;
+    height: 10px;
+    padding: 5px;
+    border: 3px solid green;
+    border-radius: 10px;
+    font-size: 16px;
+}
+.btn{
+    padding: 10px 20px;
+    background-color: #009dff; 
+    color: #390000; 
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;    
+}
+.btn:hover{
+    background-color: blue;
+    box-shadow: rgb(226, rgb(101, 255, 101), rgb(75, 75, 255), 0.7);
+}
+.hidden-radio{
+    display: none;
+}
+.select-wraper{
+    display: none;
+}
+.select-wraper.open{
+    display: block;
+}

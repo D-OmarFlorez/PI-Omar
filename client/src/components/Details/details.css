@@ -1,0 +1,7 @@
+@font-face {
+    font-family: 'strasua';
+    src: url(../estilos/Strasua.ttf);
+}
+.background{
+    font-family: 'Strasua', Arial, Helvetica, sans-serif;
+}

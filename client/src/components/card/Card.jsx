@@ -4,9 +4,10 @@ import { addFavGame, removeFavGame } from "../../redux/actions";
 import "./Card.css"
 
 
-const Card =({ onClose, videogame, onCardClick}  ) => {
+const Card =({ onClose, videogame, onCardClick, deleteGame}  ) => {
     const dispatch = useDispatch();
  const[detalles, setDetalles] = useState(false);
+
  
  const handleCardClick=()=>{
     setDetalles(true)
@@ -14,7 +15,8 @@ const Card =({ onClose, videogame, onCardClick}  ) => {
  const handleOverlayClick = ()=>{
     setDetalles(!detalles);
  }
- 
+
+
 //  const myFavGame = useSelector((state) => state.myFavGames)
  
 //     const [isFav, setIsFav] = useState (false);
@@ -28,21 +30,20 @@ const Card =({ onClose, videogame, onCardClick}  ) => {
 //     }
  
 //  }
+
  
- 
+ const handleButton = (videogame)=>{
+   if(isNaN(videogame.id)){
+      console.log();
+   deleteGame()
+   }
+ }
 
  const handleClick =(event)=>{
     event.preventDefault();
     onCardClick(videogame.id)
  }
-    // useEffect(()=>{
-    //    myFavGame?.forEach(fav => {
-    //       if(fav.idVideogames === videogame.idVideogames) {
-    //          setIsFav(true)
-    //       }
-    //    });
-    // }, [myFavGame])
-    
+   
    
     return (
        
@@ -60,16 +61,17 @@ const Card =({ onClose, videogame, onCardClick}  ) => {
     )
  } */}
            <button onClick={() => {onClose(videogame.id)}}>❌</button>
+                    
           
             
         <div  className="card"  onClick={ handleClick}>
           <div onClick={handleCardClick}> 
  
-          <h2>{videogame?.name}</h2>
+          <h2 className="cuerpoCarta">{videogame?.name}</h2>
           <img className="cartaJpg" src={videogame?.background_image} alt = {videogame?.name} /> 
           </div>
          
-          {detalles &&(
+          {/* {detalles &&(
              <div  onClick={handleOverlayClick} style={{ position: 'fixed', top: '50%', left: '50%', right: 0,width:'40%', height:'91%', bottom: 0, backgroundColor: 'rgba(0,0,0,0.5)', transform:"translate(-50%, -50%)", overflow:"auto", border:" 4px solid black"}}>
          <div className="background">
           <div className="nombredetalle">
@@ -77,18 +79,18 @@ const Card =({ onClose, videogame, onCardClick}  ) => {
           </div>
           <img style={{borderStyle:"outset; border-width: 5px", borderRadius:"100%", borderInlineColor:"Highlight 10px", border:"10px solid #00ffff"}} src={videogame.image} alt = {videogame.name} /> 
           <div className="carta">
-           <p ><b>Description: </b>{videogame?.description.toString()}</p>
-            <p><b>platforms:</b> {videogame?.map(v=> v.platforms).toString()}</p>
-            <p><b>Release Date: </b> {videogame?.releaseDate.toString()}</p>
-            <p><b>rating: </b> {videogame?.rating.toString()}</p>
-            <p><b>genres: </b>{videogame?.map(v=> v.genres).toString()}</p>
+           <p ><b>Description: </b>{videogame?.description}</p>
+            <p><b>platforms:</b> {videogame?.platformstoString()}</p>
+            <p><b>Release Date: </b> {videogame?.releaseDate}</p>
+            <p><b>rating: </b> {videogame?.rating}</p>
+            <p><b>genres: </b>{videogame?.genres.toString()}</p>
           </div>
           </div>
           </div>
         
             
                 
-                )}
+                )} */}
                    {/* <a href="#">
           <span></span>
           <span></span>

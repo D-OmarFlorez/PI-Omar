@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'Space';
+    src: url(../estilos/space.ttf) format(truetype)
+}
+.cuerpo{
+font-family: 'space', Arial, Helvetica, sans-serif;
+}
+.cuerpoCarta{
+    font-family: 'space', Arial, Helvetica, sans-serif;
+}

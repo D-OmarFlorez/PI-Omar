@@ -1,22 +1,43 @@
 import { useState, useEffect } from 'react'
-import { useLocation, Route, Routes, useNavigate} from 'react-router-dom';
+import { useLocation, Route, Routes, useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios'
 import Nav from './components/Nav/Nav';
 import MainPage from './components/paginaPrincipal/MainPage';
 import Cards from './components/cards/Cards';
+import PostForm from './components/post/Post';
 import LoginComponent from './components/background/BackgroundComponent'
 import './App.css'
+import Detail from './components/details/Details';
 
 
 function App() {
   const [Videogames, setVideogames] = useState([]);
-  const [detalles, setDetalles]=useState(false);
+  const [games, setGames] = useState([]);
+  const [showForm, setShowForm]= useState(false)
+  const [gameData, setGameData] = useState()
+  const navigate = useNavigate()
  const {pathname} = useLocation();
+ const video = Videogames.map(f=>f.platforms)
+const {id} = useParams
+
+ console.log(video);
+
+// useEffect(async()=>{
+//   try {
+//     await axios.get('http://localhost:3001/videogames/genre')
+    
+//   } catch (error) {
+//     alert('no se cargaron los generos')
+//     throw Error ('hubo un error al cargar los generos', error)
+//   }
+// },[])
+
 const url =`http://localhost:3001/videogames` 
   const onSearch = (idVideogames)=>{
     try {
       if(idVideogames.length === 0){
         axios(url)
+        
         .then(response => {
           const {data} = response;
           setVideogames(data)
@@ -40,6 +61,7 @@ const url =`http://localhost:3001/videogames`
     }).catch((error)=>{
         throw Error (error);
         })
+        
       
       }else{
         if(idVideogames.length < 3){
@@ -68,6 +90,59 @@ const url =`http://localhost:3001/videogames`
       }
   
     }
+  
+    const getGames = () => {
+    try {
+        axios('http://localhost:3001/videogames/MyGames')
+        .then (response =>{ 
+            setGames(response.data)
+        })
+    } catch (error) {
+        throw new Error ({'Error': error})
+        
+    }
+}
+
+const deleteGame = async(id) => {
+  try {
+    const response = await axios.delete(`http://localhost:3001/videogames/${id}`)
+    if (response.status === 200){
+      alert('juego eliminado con exito')
+      getGames()
+    }
+  } catch (error) {
+    throw Error ('error al eliminar el juego', error)
+    
+  }
+}
+const updateGame = async (id) => {
+  try {
+    const response = await axios.get(`http://localhost:3001/videogames/${id}`);
+    const gameData = response.data;
+
+    setGameData({
+      name: gameData.name,
+      image: gameData.image,
+      description: gameData.description,
+      platforms: gameData.platforms,
+      releaseDate: gameData.releaseDate,
+      rating: gameData.rating,
+      genreNames: gameData.genreNames
+
+    });
+
+    setShowForm(true);
+   
+  } catch (error) {
+    console.error('Error al obtener datos del juego', error);
+  }
+};
+
+const handleCloseForm = ()=>{
+  setShowForm(!showForm)
+}
+
+
     const handleClose = ()=>{
       setShowDetail(false);
       setSelectedCharacter(null);
@@ -79,40 +154,59 @@ const url =`http://localhost:3001/videogames`
       setVideogames(videogameFilter);
     }
     const handleCardClick = async (id) => {
-      try {
-        const response = await axios(`http://localhost:3001/videogames${id}`);
-        const { data } = response;
-    
-        setDetalles(data);
-        setPersonaje(true);
-      } catch (error) {
-        console.error('Error al obtener detalles del videojuego', error);
-      }
+     navigate (`/Details/${id}`)
     };
+
     const limpiarHome= () =>{ 
       setVideogames([]);
     }
+    
+
     const random =(random)=>{
     const [randomGame, setRandomGame]= useState(null); 
     }
   return (
     <div>
       <div className='App'>
+        <div>
      {pathname !== "/" &&(
-      <Nav onSearch={onSearch} limpiarHome={limpiarHome} setRandomGame={random}/>
+      <Nav onSearch={onSearch} limpiarHome={limpiarHome} setRandomGame={random} getGames={getGames}/>
      )}
-     
-      <LoginComponent BackgroundImage='https://i.pinimg.com/originals/81/df/1c/81df1c66a7bc01dc38bbc4744995ed12.jpg'></LoginComponent>
+     </div>
+      <LoginComponent BackgroundImage='https://www.xtrafondos.com/wallpapers/assassins-creed-15-aniversario-11354.jpg'></LoginComponent>
      <Routes>
      
-      <Route path ='/home' element={<Cards Videogames={Videogames} handleCardClick={handleCardClick}
-      onClose={onClose} />}></Route>
+      <Route path ='/home' element={<Cards Videogames={Videogames} onCardClick={handleCardClick}
+      onClose={onClose} getGames={getGames}  />} ></Route>
       <Route path ='/' Component={MainPage}></Route>
+      <Route path ='/Details/:id' element={<Detail/>}/>
 
      </Routes>
+     <p></p>
+    {pathname!== "/" && games.map((game) =>(
+      
+      <div key={game.id}>
+          <p>{game.name}</p>
+          <img className='imagenDb' src={game.image} alt={game.name}/>
+          <button  onClick={() => deleteGame(game.id)}>Eliminar</button>
+          <div>
+          {showForm &&
+          <div className='containerup'>
+          <div className='updatediv'>
+          <PostForm id={game.id} />
+          <button className='close-button' onClick={handleCloseForm}>X</button>
+          </div>
+          </div>}
+          </div>
+           <button onClick={()=>updateGame(game.id)}>Actualizar</button>
+            </div>
+            
+          
+   ))}
+    
      </div>
     </div>
   )
+  
 }
-
 export default App
