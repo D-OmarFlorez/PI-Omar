@@ -4,7 +4,16 @@
 }
 .cuerpo{
 font-family: 'space', Arial, Helvetica, sans-serif;
+width: 33.33%; /* Para mostrar tres elementos por fila */
+padding: 10px;
+box-sizing: border-box;
+text-align: center;
+
+
 }
-.cuerpoCarta{
-    font-family: 'space', Arial, Helvetica, sans-serif;
+
+.box{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
 }

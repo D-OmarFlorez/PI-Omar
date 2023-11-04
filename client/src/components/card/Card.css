@@ -3,25 +3,37 @@
   src: url(../estilos/space.ttf) format(truetype);
 }
 
+
 .card:hover{
     box-shadow: 0 15 35px #00ffff;
    }
 .card{
     font-family: "space", Arial, Helvetica, sans-serif;
     background: radial-gradient(center, red, yellow) ;
+  
+}
+.caja{
+    width: 100%;
+    height: 50px;
 
 }
 .carta{
   color: hsl(309, 26%, 95%) ;
   background-color: rgb(0, 0, 0, 0.8);
   font-size:medium;
+  width: 500px;
+  transition: box-shadow 0.5s;
+}
+.carta:hover{
+ box-shadow: 0 0 15px #00d50480;
 }
 .cuerpoCarta{
   font-family: 'space', Arial, Helvetica, sans-serif;
 }
 .cartaJpg{
-    width: 200px;
-    height: auto;
+    width: 250px;
+    height: 150px;
+    
 }
 .overlay{
     position: 'fixed';
@@ -32,39 +44,27 @@
      background-Color: 'rgba(0,0,0,0.5)';
      /* animation: expand .5s ease-in-out forwards;  */
 }
-.nombredetalle{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    height: '50px';
-    border-radius: '25px';
-    background: 'linear-gradient(to right, #ff7e5f';
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color: #fff;
-    border:'3px' green ;
-    font-size: '35px';
-    box-shadow: 'o 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)';
-}   
+ 
 .background{
     width: '300px';
     height: '200px';
-    background-image: url('https://i.pinimg.com/originals/6f/01/d5/6f01d505e6f3bc090ce9874aa72ff2a0.gif');
+    background-image: url('../estilos/pxfuel.jpg');
     background-color: rgba(255, 255, 255, 0.5);
     background-blend-mode: lighten;
-    background-size: cover;
+    background-size:contain;
     border-radius: 20px;
 }
 .contenedore {
     position: relative;
-    width: 110%; /* Ajusta el ancho según tus necesidades */
+    width: 110%; 
     height: 340px;
     background-color: white;
     border-top: 5px solid #03e9f4;
     border-right: 15px solid #03e9f4;
     border-bottom: 10px solid deep black;
     padding: 5px;
-    animation: moveLine 4s linear infinite; /* Ajusta la altura según tus necesidades */
-    border: 2px solid transparent; /* Borde transparente */
+    animation: moveLine 4s linear infinite; 
+    border: 2px solid transparent; 
     overflow: hidden;
   }
   @keyframes moveLine {
@@ -88,10 +88,96 @@
     }
   }
   
-  /* Aplica la animación al borde de la tarjeta */
+  
   .contenedor {
-    animation: borderAnimation 4s linear infinite; /* Ajusta la duración según tus necesidades */
+    animation: borderAnimation 4s linear infinite; 
     border-image-slice: 1;
     border-image-repeat: round;
-    border-image-width: 2px; /* Grosor de la línea */
+    border-image-width: 2px;
   }
+  .genre {
+    transition: opacity 0.3s ease;
+    opacity: 1;
+    border-radius: 10px; 
+}
+
+.genre:hover {
+    opacity: 1;
+    
+}
+
+.genre.Action {
+    background-color: rgba(255, 0, 0, 0.8); 
+}
+
+.genre.Casual {
+    background-color: rgba(0, 255, 0, 0.8); 
+}
+
+.genre.Adventure {
+    background-color: rgba(0, 0, 255, 0.8); 
+}
+
+.genre.RPG {
+    background-color: rgba(128, 0, 128, 0.8); 
+}
+
+.genre.Indie {
+    background-color: rgba(255, 165, 0, 0.8); 
+}
+
+.genre.Strategy {
+    background-color: rgba(75, 0, 130, 0.8); 
+}
+
+.genre.Shooter {
+    background-color: rgba(255, 192, 203, 0.8); 
+}
+.genre.Simulation {
+    background-color: rgba(255, 255, 0, 0.8); 
+}
+
+.genre.Puzzle {
+    background-color: rgba(0, 128, 128, 0.8); 
+}
+
+.genre.Arcade {
+    background-color: rgba(128, 128, 128, 0.8); 
+}
+
+.genre.Platformer {
+    background-color: rgba(210, 180, 140, 0.8); 
+}
+
+.genre.MassivelyMultiplayer {
+    background-color: rgba(85, 107, 47, 0.8); 
+}
+
+.genre.Racing {
+    background-color: rgba(70,130,180 ,0.8); 
+}
+
+.genre.Sports {
+    background-color: rgba(240,230,140 ,0.8);
+}
+
+.genre.Fighting {
+    background-color: rgba(220,20,60 ,0.8); 
+}
+
+.genre.Family {
+    background-color: rgba(255,99,71 ,0.8); 
+}
+
+.genre.BoardGames {
+    background-color: rgba(64,224,208 ,0.8); 
+}
+
+.genre.Educational {
+    background-color: rgba(218,165,32 ,0.8); 
+}
+
+.genre.Card {
+    background-color: rgba(100,149,237 ,0.8); /* Azul maíz medio */
+}
+

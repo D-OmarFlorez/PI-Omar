@@ -8,12 +8,9 @@
 .updatediv{
   background-color: black;
   background-image: -moz-linear-gradient rgba(85, 8, 230, 0.8);
-  align-items: center;
+  display: flex;
   justify-content:left;
-  float: center;
-  height: 600px;
-
-  padding: 20px;
+  height: 500px;
   border: 5px solid ;
   background-image: url('https://i.pinimg.com/originals/00/ef/a6/00efa61325c17584d2c7ecee8bfbd0fb.gif'); 
   background-size: cover;
@@ -26,19 +23,19 @@
   border-image: linear-gradient(to top, rgb(181, 1, 1), rgb(14, 7, 142), rgb(193, 213, 9)) 3;
 }
 .containerup{
-  align-items: center;
+  
   align-content: center;
-  padding-left: 500px;
+  padding-left: 280px;
   display: grid;
   width: 50%;
-  padding-top: 150px;
-  height: 340px;
+  height: 330px;
 
   place-items: center;
 }
 .imagenDb{
   height: 300px;
   width: auto;
+  padding-left: 8%;
 }
 .close-button {
   position: relative;
@@ -76,4 +73,8 @@
 
 .close-button:focus {
   outline: none;
+}
+.moveButton{
+  position: absolute;
+  padding-left: 150px;
 }

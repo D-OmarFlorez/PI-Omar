@@ -18,8 +18,9 @@ return(
           <input style={{
             border: '3px solid #00ffff',
             borderRadius: '10px'
-          }} type='search' onChange={handleChange} value = {idVideogames} onKeyDown={handleEnter} placeholder="busca por nombre o por numero"/>
-         <button onClick={() => handleSearch(idVideogames)}>Buscar</button> 
+          }} type='search' onChange={handleChange} value = {idVideogames} onKeyDown={handleEnter} placeholder="busca por nombre o por numero">
+          </input>
+            <button onClick={() => handleSearch(idVideogames)}>Buscar</button> 
         
       </div>
 )

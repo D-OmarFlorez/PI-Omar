@@ -3,7 +3,7 @@ import axios from 'axios';
 import './post.css'
 import validatePost from './validation'
 
-const PostForm = ({id}, onClose) => {
+const PostForm = ({id, onClose}) => {
   const [gameData, setGameData] = useState({
     name: '',
     image:'',

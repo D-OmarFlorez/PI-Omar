@@ -13,6 +13,7 @@ const Nav =({onSearch, limpiarHome, mostrarAbout, getGames}) =>{
     const [randomGame, setRandomGame] = useState(null);
     const navigate = useNavigate();
     const [showForm, setShowForm]= useState(false)
+    const [navVisible, SetNavVisible]= useState(true);
 
     const Logout = () =>{
         navigate('/');
@@ -30,7 +31,12 @@ const Nav =({onSearch, limpiarHome, mostrarAbout, getGames}) =>{
     const principal = ()=>{
         navigate('/home')
     }
-
+    const filter = () =>{
+        navigate('/filter')
+    }
+    const myGames = () =>{
+        navigate('/gamesdb')
+    }
     const random = async ()=>{
     try{
         const randomId= Math.round(Math.random() * 855363)
@@ -46,25 +52,36 @@ const Nav =({onSearch, limpiarHome, mostrarAbout, getGames}) =>{
     }
 }
 return(
-    <div>    <div>
-        <nav className="navBar">
+    <div>   
+         <button className="toggle-nav" onClick={() => SetNavVisible(!navVisible)}>
+            {navVisible ? '☰' : '☰'}
+        </button>
+         <div>
+    {navVisible &&
+        <nav className={`navBar ${navVisible ? '' : 'hide'}`}>
+
+       <SearchBar onSearch={onSearch}/>
+
         <button onClick={logoutClick}>
             Pagina Principal
         </button>
+        <button onClick={filter}>Genres</button>
         <button onClick={principal}>volver a inicio</button>
         {confirm&&(
             <div onClick={salirConfirm} style={{borderRadius:"30px", position: 'fixed',color:'black', top: '30%', left: '50%', right: 0,width:'50%', height:'20%', bottom: 0, backgroundColor: 'rgba(225,275,214,0.9)', transform:"translate(-50%, -50%)", overflow:"auto", border:" 4px solid black"}}>
                 <p>!seguro que quieres salir?</p>
-                <button onClick={Logout}>si</button>
-                <button onClick={salirConfirm}>no</button>
+                <div className="log">
+                <button className="loga" onClick={Logout}>si</button>
+                <button className="loga" onClick={salirConfirm}>no</button>
+                </div>
                 </div>)}
         <button onClick={handleShowForm}>
             {showForm ? 'crea un juego!' : 'crea un juego!'}
         </button>
-        <button onClick={getGames}>MyGames</button>
+        <button onClick={myGames}>MyGames</button>
         <button onClick={limpiarHome}>limpiar todo</button>
-      <SearchBar onSearch={onSearch}/>
         </nav>
+}
         {showForm && (
             
         <div className="form" >

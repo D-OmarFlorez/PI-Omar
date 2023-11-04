@@ -1,31 +1,62 @@
 import { 
-    ADD_FAV, 
-    REMOVE_FAV,
-    GENRE,
+    CLEAR_VIDEOGAMES, 
+    DELETE_GAME, 
+    GET_GAMES,
+    MOSTRAR_FORM,
+    REMOVE_VIDEOGAME,
+    UPDATE_GAME,
+    SEARCH_GAMES
     
 } from "./ActionsType"
 const initialState = {
 
-    myFavGames: [],
-    allFavGames:[]
+    videogames: [],
+    gameData: null,
+    games:[],
+    showForm: false
 }
 export const reducer = (state= initialState, action)=>{
     switch (action.type){
-        case ADD_FAV:
+        case REMOVE_VIDEOGAME:
             return{
                 ...state,
-                myFavGames:[...state.allFavGames, action.payload],
-                allFavGames:[...state.allFavGames, action.payload]
-            }
-        case REMOVE_FAV:
-            return{
-                ...state,
-                myFavGames: state.myFavGames.filter(({id})=>{
+                videogames: state.videogames.filter(({id})=>{
                     return id !== action.payload
                 })
             }
-        case GENRE:
-        const filterByGenre=[...state.allFavGames].filter((favGame)=> favGame.genre === action.payload)    
-        
+            case CLEAR_VIDEOGAMES:
+                return{
+                    ...state,
+                    videogames: []
+                }
+            case MOSTRAR_FORM:
+                return{
+                    ...state,
+                    showForm: !state.showForm
+                }
+            case GET_GAMES:
+                return{
+                    ...state,
+                    games: action.payload
+                }
+            case DELETE_GAME:
+                return{
+                    ...state,
+                    games: state.games.filter((game)=> game.id !== action.payload)
+                }
+            case UPDATE_GAME:
+                return {
+                  ...state,
+                  gameData: action.payload.gameData,
+                  showForm:action.payload.showForm
+                };
+            case SEARCH_GAMES:
+                return{
+                  ...state,
+                  videogames: action.payload,
+                }
+                default:
+                    return state;
+                
     }
 }

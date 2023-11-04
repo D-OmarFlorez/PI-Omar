@@ -1,0 +1,41 @@
+.img{
+    width: 100%;
+    height: auto;
+}
+.box{
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+.game-box{
+    width: 33.33%; /* Para mostrar tres elementos por fila */
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+}
+.colador button{
+    border: 2px solid black;
+    color: blue;
+    background-color: rgba(155, 102, 247, 0.7);
+    border-radius: 10px;
+
+}
+.colador button:hover{
+    background-color: rgb(153, 8, 169);
+    box-shadow: 15px 10px 15px radial-gradient(green, darkmagenta, darkblue);
+}
+.colador{
+    border-width: 5px ;
+    border-style: solid;
+    border-image: linear-gradient(45deg, blue, violet, blue) 1;
+    animation: border-move 2s linear infinite;
+}
+@keyframes border-move {
+    0%{
+        background-position: 0 0;
+    }
+    100%{
+        background-position: 100% 100%;
+    }
+    
+}

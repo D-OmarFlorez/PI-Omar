@@ -11,7 +11,7 @@ module.exports=(async(req, res)=>{
         }
      
         await videogames.destroy();
-        res.json({sucess: 'videojuego eliminado con exito, igual, era una basura xd'})
+        res.status(200).json({sucess: 'videojuego eliminado con exito, igual, era una basura xd'})
     }catch(error){
 res.status(500).json({error: 'Something happened and we couldn´t delete the game.'})
     }

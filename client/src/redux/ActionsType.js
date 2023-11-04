@@ -1,3 +1,9 @@
-export const ADD_FAV = 'ADD_FAV'
-export const REMOVE_FAV = 'REMOVE_FAV'
+
+export const REMOVE_VIDEOGAME = 'REMOVE_VIDEOGAME'
 export const GENRE = 'GENRE'
+export const CLEAR_VIDEOGAMES = 'CLEAR_VIDEOGAMES'
+export const MOSTRAR_FORM = 'MOSTRAR_FORM'
+export const GET_GAMES = 'GET_GAMES'
+export const DELETE_GAME = 'DELETE_GAME'
+export const UPDATE_GAME = ' UPDATE_GAME'
+export const SEARCH_GAMES = 'SEARCH_GAMES'

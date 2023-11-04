@@ -1,7 +1,6 @@
 const validatePost = (post) => {
     const errors = {};
   
-    const allowedPlatforms = ["xbox", "PS2", "PC", "Switch"];
     const allowedGenres = ["Action", "Casual", "Adventure", "RPG", "Indie", "Strategy", "Shooter", "Simulation", "Puzzle", "Arcade", "Platformer", "Massively Multiplayer", "Racing", "Sports", "Fighting", "Family", "Board Games", "Educational", "Card"];
   
     if (!post.name) {
