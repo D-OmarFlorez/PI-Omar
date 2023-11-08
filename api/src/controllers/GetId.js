@@ -1,4 +1,4 @@
-const {Videogame} = require ('../db')
+const {Videogame, Genre} = require ('../db')
 const axios = require ('axios')
 
 module.exports=(async (req, res)=>{
@@ -8,7 +8,7 @@ module.exports=(async (req, res)=>{
     }
     try{ 
         if(isNaN(idVideogame)){
-    const dbvideogame= await Videogame.findByPk(idVideogame);
+    const dbvideogame= await Videogame.findByPk(idVideogame,{include: Genre} );
 
      if(dbvideogame){
          res.json(dbvideogame);

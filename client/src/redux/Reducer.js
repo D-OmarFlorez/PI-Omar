@@ -7,16 +7,19 @@ import {
     UPDATE_GAME,
     SEARCH_GAMES,
     LOAD_VIDEOGAMES,
-    DROP_ID
+    DROP_ID,
+    LOADING,
+    SET_DETAIL
     
 } from "./ActionsType"
 const initialState = {
 
+    videogamesid:{},
     videogames: [],
-    gameData: null,
     games:[],
+    gameData: null,
     showForm: false,
-    videogamesid:{}
+    loading: false
 }
 export const reducer = (state= initialState, action)=>{
     
@@ -70,6 +73,16 @@ export const reducer = (state= initialState, action)=>{
                         ...state,
                         videogamesid: action.payload
                     }
+                    case LOADING:
+                        return{
+                            ...state,
+                            loading: !state.loading
+                        }
+                  case SET_DETAIL:
+                      return{
+                          ...state,
+                          videogamesid:{}
+                      }
                 default:
                     return state;
                 

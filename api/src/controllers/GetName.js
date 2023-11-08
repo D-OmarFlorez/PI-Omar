@@ -33,7 +33,9 @@ module.exports= ( async (req, res)=>{
      videogames.push(...apiVideogames)
      
     
-    if( videogames.length > 0){
+   
+        if (videogames.length > 15) {
+            videogames = videogames.slice(0, 15);
         res.json(videogames);
     }else{
         res.status(404).send('no se encontraron videojuegos con este nombre🫢')

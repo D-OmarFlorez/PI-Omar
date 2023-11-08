@@ -9,7 +9,9 @@ import {
     UPDATE_GAME,
     SEARCH_GAMES,
     LOAD_VIDEOGAMES,
-    DROP_ID
+    DROP_ID,
+    LOADING,
+    SET_DETAIL
     
 } from "./ActionsType"
 import axios from 'axios'
@@ -67,6 +69,14 @@ export const dropId = (id) =>{
     }
   }
 }
+export const loading = () =>{
+  return (dispatch)=>{
+    dispatch({type: LOADING})
+    setTimeout(() => {
+      dispatch({type: LOADING})
+    }, 2000);
+}
+}
 export const removeVideogame = (id) => {
     return { type: REMOVE_VIDEOGAME, payload: id }
 }
@@ -123,10 +133,16 @@ export const deleteGameSuccess = (id) => ({
       }
     };
   };
-export const updateGames = (gameData, showForm) =>({
+  export const updateGames = (gameData, showForm) =>({
     type: UPDATE_GAME,
     payload:{gameData, showForm}
-})
+  })
+  export const setDet = ()=>({
+    type: SET_DETAIL,
+  
+  })
+    
+  
 export const fetchGame = (id, showForm) =>{
     return async(dispatch)=>{
     try {
@@ -147,4 +163,6 @@ export const fetchGame = (id, showForm) =>{
         console.error('Error al obtener datos del juego', error);
       }
     };
+
+    
 }

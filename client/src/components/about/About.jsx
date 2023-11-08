@@ -41,7 +41,7 @@ const About = () => {
         </div>
 )}
 {showDiv && (
-        <div className='flotante'>
+        <div className='flotantes'>
         <p onClick={div}>Nací el 21 de septiembre de 2002 en Colombia, un país rico en cultura y diversidad. A la temprana edad de 10 años, mi vida dio un giro inesperado cuando me mudé a Brasil, a una hacienda retirada del pueblo donde la conexión a internet era un lujo. Sin embargo, este cambio de escenario no hizo más que avivar mi curiosidad y pasión por los sistemas informáticos y electromecánicos.
 
 Desde muy joven, demostré una habilidad innata para la mecánica, la electromecánica y el manejo de software de componentes electrónicos. Esta pasión por el aprendizaje y la innovación me llevó a explorar y dominar estos campos, a pesar de las limitaciones de mi entorno.
@@ -73,14 +73,14 @@ Estoy emocionado por lo que el futuro me depara en este emocionante campo. Y mie
 
       <div className="contact-info">
         <h2>Contacto</h2>
-        <p>Email:  <a href="sneiderflorez2002@gmail.com">sneiderflorez2002@gmail.com</a></p>
+        <p>Email:  <a href="mailto:sneiderflorez2002@gmail.com">sneiderflorez2002@gmail.com</a></p>
         <p>telefono: +57 314 3213318 <br/> (┬┬﹏┬┬)+57 315 4581679</p>
         <p>
           Redes sociales:
-          <a href="https://www.facebook.com/omarsneider.florezmoreno.7/"><img className='logo' src='https://d1csarkz8obe9u.cloudfront.net/posterpreviews/facebook-design-template-935d72736eb17f5a6429dbf56a006a20_screen.jpg?ts=1585226980' alt='Facebook'/></a>,
-          <a href="https://www.linkedin.com/in/sneider-florez-403a47278"><img className='logo' src='https://e7.pngegg.com/pngimages/93/587/png-clipart-linkedin-logo-linkedin-logo-computer-icons-business-symbol-linkedin-icon-miscellaneous-blue-thumbnail.png' alt='Linkedlin'/></a>,
-          <a href="https://github.com/D-OmarFlorez"><img className='logo' src='https://w7.pngwing.com/pngs/914/758/png-transparent-github-social-media-computer-icons-logo-android-github-logo-computer-wallpaper-banner-thumbnail.png' alt='GitHub'/></a>,
-          <a href="https://www.instagram.com/elomar_love/"><img className='logo' src='https://w7.pngwing.com/pngs/462/874/png-transparent-instagram-logo-icon-instagram-icon-text-logo-sticker-thumbnail.png' alt='Instagram'/></a>
+          <a href="https://www.facebook.com/omarsneider.florezmoreno.7/" target='blank'><img className='logo' src='https://d1csarkz8obe9u.cloudfront.net/posterpreviews/facebook-design-template-935d72736eb17f5a6429dbf56a006a20_screen.jpg?ts=1585226980' alt='Facebook'/></a>,
+          <a href="https://www.linkedin.com/in/sneider-florez-403a47278" target='blank'><img className='logo' src='https://e7.pngegg.com/pngimages/93/587/png-clipart-linkedin-logo-linkedin-logo-computer-icons-business-symbol-linkedin-icon-miscellaneous-blue-thumbnail.png' alt='Linkedlin'/></a>,
+          <a href="https://github.com/D-OmarFlorez" target='blank'><img className='logo' src='https://w7.pngwing.com/pngs/914/758/png-transparent-github-social-media-computer-icons-logo-android-github-logo-computer-wallpaper-banner-thumbnail.png' alt='GitHub'/></a>,
+          <a href="https://www.instagram.com/elomar_love/" target='blank'><img className='logo' src='https://w7.pngwing.com/pngs/462/874/png-transparent-instagram-logo-icon-instagram-icon-text-logo-sticker-thumbnail.png' alt='Instagram'/></a>
         </p>
       </div>
       <div className="copyright-info">

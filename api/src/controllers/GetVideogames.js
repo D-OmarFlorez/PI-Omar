@@ -11,7 +11,6 @@ module.exports=(async (req, res) =>{
   const apiUrl = nextPage || `https://api.rawg.io/api/games?key=bf3907b002f9450c8a1ae32f7f532d03`
     const response = await axios.get(apiUrl);
      nextPage= response.data.next
-
     const adaptarDatosApi=(datosApi)=> {
         return {
           ...datosApi,
@@ -19,7 +18,10 @@ module.exports=(async (req, res) =>{
         };
       }
     const apiVideogames = response.data.results.map(adaptarDatosApi);
-    const videogames = [...dbVideogames, ...apiVideogames, ]
-    res.json({videogames, nextPage: nextPage || null});
+    let videogames = [...dbVideogames, ...apiVideogames, ]
+    if (videogames.length > 15) {
+      videogames = videogames.slice(0, 15);
+    }
+    res.json({videogames, nextPage: nextPage});
 
 })

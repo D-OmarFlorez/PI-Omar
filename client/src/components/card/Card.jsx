@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import "./Card.css"
 
 
-const Card =({ onClose, videogame, onCardClick, deleteGame}  ) => {
+const Card =({ onClose, videogame, onCardClick, deleteGame, loadings}  ) => {
     const dispatch = useDispatch();
  const[detalles, setDetalles] = useState(false);
  const [currentImage, setCurrentImage] = useState(videogame.background_image);
@@ -44,6 +44,7 @@ const handleMouseLeave = () => {
  const handleClick =(event)=>{
     event.preventDefault();
     onCardClick(videogame?.id)
+    loadings()
  }
  const genreClass = videogame?.genres[0]?.name;
    

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const SearchBar = ({onSearch}) =>{
+const SearchBar = ({onSearch, loading}) =>{
   const [idVideogames, setId] = useState ("")
 
   const handleChange = (event => setId(event.target.value));
@@ -20,7 +20,8 @@ return(
             borderRadius: '10px'
           }} type='search' onChange={handleChange} value = {idVideogames} onKeyDown={handleEnter} placeholder="busca por nombre o por numero">
           </input>
-            <button onClick={() => handleSearch(idVideogames)}>Buscar</button> 
+            <button onClick={() =>{ handleSearch(idVideogames)
+            loading()}}>Buscar</button> 
         
       </div>
 )

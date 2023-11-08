@@ -17,7 +17,6 @@ const PostForm = ({id, onClose}) => {
     rating: 0,
     genreNames: []
   });
-  console.log(gameData);
   const [errors, setErrors]= useState({})
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
@@ -63,7 +62,7 @@ const PostForm = ({id, onClose}) => {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     
@@ -107,51 +106,56 @@ const PostForm = ({id, onClose}) => {
 }
 }
 
+
   return (
+    <div>
     <form onSubmit={handleSubmit} className='form'>
       <button onClick={onClose}></button>
     
 <div className="divGeneral">
       <label className="labelGeneral">
         Nombre:
-      </label>
+      </label><br/>
         <input type="text" name="name" className='formControl' value={gameData.name} onChange={handleChange} />
       {errors.name && <p className='error'>{errors.name}</p>}
+      <hr/>
 </div>
       <div className='divGeneral'>
         <label className='labelGeneral'>
           Url imagen:
-          <input type='text' name='image' className='formControl' value={gameData.image} onChange={handleChange}/>
+          <br/><input type='text' name='image' className='formControl' value={gameData.image} onChange={handleChange}/>
         </label>
+        <hr/>
       </div>
 <div className="divGeneral">
       <label className="labelGeneral">
         Descripción:
-        <textarea name="description" value={gameData.description} onChange={handleChange} />
+        <br/> <textarea className='textarea' name="description" value={gameData.description} onChange={handleChange} >
+        </textarea>
         {errors.description && <p className='error'>{errors.description}</p>}
       </label>
+      <hr/>
 </div>
-<hr style={{ 
-  borderStyle: "none", 
-  height: "2px", 
-  backgroundImage: "linear-gradient(to right, red, orange , yellow, green, blue, indigo, violet)" 
-}} />
-<div className="divGeneral">
+
+<div className="divGeneral"><br/><br/>
       <label className="labelGeneral">
         Fecha de lanzamiento:
         <input type="date" name="releaseDate" className='formControl' value={gameData.releaseDate} onChange={handleChange} />
         {errors.releaseDate && <p className='error'>{errors.releaseDate}</p>}
       </label>
+      <hr/>
 </div>
 <div className='divGeneral'>
 <label className="labelGeneral" >
+  <br />
   Géneros:
-  <button onClick={toggleDropdown}>select</button>
+  <button type='button' onClick={toggleDropdown}>select</button>
   <div className={`select-wraper ${isDropdownVisible ? 'open' : ''}`}>
   <select className='arreglo' multiple={true} name="genreNames" onChange={handleChangeGenre}>
     <option value="Action">Action</option>
     <option value="Casual">Casual</option>
     <option value="Adventure">Adventure</option>
+    <option value="Terror">Terror</option>
     <option value="RPG">RPG</option>
     <option value="Indie">Indie</option>
     <option value="Strategy">Strategy</option>
@@ -172,16 +176,13 @@ const PostForm = ({id, onClose}) => {
   {errors.genreNames && <p className='error'>{errors.genreNames}</p>}
   </div>
 </label>
+<hr/>
 </div>
-<hr style={{ 
-  borderStyle: "none", 
-  height: "2px", 
-  backgroundImage: "linear-gradient(to right, red, orange , yellow, green, blue, indigo, violet)" 
-}} />
+
   <div className='divGeneral'>        
             <label className="labelGeneral">
         Plataformas:
-        <button onClick={toggleDropdown}>select</button>
+        <button type='button' onClick={toggleDropdown}>select</button>
         <div className={`select-wraper ${isDropdownVisible ? 'open' : ''}`}>
         <select className='arreglo' multiple={true} name="platforms" onChange={handleChange}>
           <option value="xbox">Xbox</option>
@@ -204,6 +205,7 @@ const PostForm = ({id, onClose}) => {
         {errors.platforms && <p className='error'>{errors.platforms}</p>}
         </div>
       </label >
+      <hr/>
 </div>
 
 <div className='divGeneral'>
@@ -228,13 +230,27 @@ const PostForm = ({id, onClose}) => {
       </div>
 <div className="divGeneral">
   {pathname !== '/gamesdb' || games == 0 ? (
-    <button type="submit" className='btn' onClick={handleSubmit} disabled={Object.keys(errors).length !== 0 || !gameData.name || !gameData.image || !gameData.description || !gameData.platforms.length || !gameData.releaseDate || !gameData.rating || !gameData.genreNames.length}>Enviar</button>
+    <button type="submit" className='btn' disabled={Object.keys(errors).length !== 0 || !gameData.name || !gameData.image || !gameData.description || !gameData.platforms.length || !gameData.releaseDate || !gameData.rating || !gameData.genreNames.length}>Enviar</button>
     ): (
     <button type ="button"  className='btn' onClick={handleUpdate} >Actualizar</button>
   ) 
 }</div>
       
+      
+   
+  
     </form>
+    <div className="preview">
+      <h2>Vista previa:</h2>
+      <p>Nombre: {gameData.name}</p>
+      <p>imagen:<br/><img className='previmg' src={gameData.image} alt='pon una imagen valida'></img></p>
+      <p>Descripción: {gameData.description}</p>
+      <p>creado en: {gameData.releaseDate}</p>
+      <p>Generos: {gameData.genreNames?.join(', ')}</p>
+      <p>plataformas: {gameData.platforms.join(', ')}</p>
+      <p>calificacion: {gameData.rating}</p>
+    </div>
+    </div>
   );
 };
 

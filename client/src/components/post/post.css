@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Munsteria';
-    src: url(../estilos/Munsteria.ttf) format('truetype');
+    src: url(../estilos/space.ttf) format('truetype');
   }
 .divGeneral {
     justify-content: left;
@@ -14,9 +14,9 @@
 }
 .labelGeneral {
     align-content: center;
-    font-family: 'Munsteria', Georgia, 'Times New Roman', Times, serif;
+    font-family:'Munsteria', Georgia, 'Times New Roman', Times, serif;
     justify-content: center;
-    
+    color: azure;
     height: auto;
     bottom: 20px;
     align-items: center;
@@ -28,12 +28,24 @@
    height: 500px;
 }
 .formControl{
-    width: 50%;
+    width: 100%;
     height: 10px;
     padding: 5px;
     border: 3px solid green;
     border-radius: 10px;
     font-size: 16px;
+    transform: translateX();
+    z-index: 1;
+}
+.preview{
+    border: 10px solid;
+    border-image: url(https://i.pinimg.com/474x/3f/4a/1a/3f4a1a4ecdb889de7b10d5d0822341ec.jpg) 20 round;
+    transform: translateX(500px);
+    position: relative;
+    height: 500px;
+    width: 300px;
+    background-image: url(https://i.pinimg.com/474x/45/93/4e/45934e0a0e4207824464e69e2709383e.jpg);
+    background-size: cover;
 }
 .btn{
     padding: 10px 20px;
@@ -67,4 +79,25 @@
 .error{
     color: red;
     font-size: 12px;
+}
+
+textarea {
+    width: 100%;
+    height: 20px;
+    padding: 10px;
+    background-color: #000;
+    color: #0f0;
+    border: 3px solid #f00;
+    border-radius: 10px;
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+  }
+hr{
+    border-Style: none; 
+  height: 2px; 
+  background-Image: linear-gradient(to right, red, orange , yellow, green, blue, indigo, violet)
+}
+.previmg{
+    height: 90px;
+    width: auto;
 }

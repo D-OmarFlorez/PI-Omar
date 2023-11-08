@@ -20,7 +20,7 @@ const router = Router();
 
 /*rutas*/
 
-router.get('/videogames/next', NextPages)
+router.get('/videogames/next/:id', NextPages)
 
 router.get('/videogames',GetVideogames);
 

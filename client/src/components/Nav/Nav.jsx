@@ -1,13 +1,13 @@
 import SearchBar from "../searchBar/SearchBar";
 import { useState, useEffect } from "react";
 import React from "react";
-import {Link, useNavigate} from "react-router-dom"
-import axios from "axios"
+import {useNavigate} from "react-router-dom"
 import './nav.css'
 /**components */
 import PostForm from "../post/Post";
+import { loading } from "../../redux/actions";
 
-const Nav =({onSearch, limpiarHome, playaudio}) =>{
+const Nav =({onSearch, limpiarHome, playaudio, loadings}) =>{
 
     const [confirm, setConfirm] = useState (false);
     const [randomGame, setRandomGame] = useState(null);
@@ -16,52 +16,44 @@ const Nav =({onSearch, limpiarHome, playaudio}) =>{
     const [navVisible, SetNavVisible]= useState(true);
 
     const Logout = () =>{
-        navigate('/');
         playaudio()
+        navigate('/');
     }
     const logoutClick = () =>{
+        loadings()
         setConfirm(true);
+        limpiarHome()
     }
     const salirConfirm = () => {
         setConfirm(false);
     }
 
     const handleShowForm=()=>{
-        setShowForm(!showForm)
         playaudio()
+        setShowForm(!showForm)
     }
     const principal = ()=>{
-        navigate('/home')
         playaudio()
+        loadings()
+        navigate('/home')
     }
     const filter = () =>{
-        navigate('/filter')
         playaudio()
+        loadings()
+        navigate('/filter')
     }
     const myGames = () =>{
-        navigate('/gamesdb')
+        loadings()
         playaudio()
+        navigate('/gamesdb')
     }
     const about = ()=>{
-        navigate('/about')
         playaudio()
+        loadings()
+        navigate('/about')
     }
-    const random = async ()=>{
-    try{
-        const randomId= Math.round(Math.random() * 855363)
-        const response = await axios(`http://localhost:3001/videogames/${randomId}`)
-        const {data} = response;
-
-        if(data.name){
-            setRandomGame(data);
-        }
-    }catch(error){
-        throw new Error ('Error al encontrar al personage')
-
-    }
-}
-let timeoutId;
-
+   
+let timeoutId
 const closeNav = () => {
   timeoutId = setTimeout(() => {
     SetNavVisible(false);
@@ -95,7 +87,7 @@ return(
     {navVisible &&
         <nav className={`navBar ${navVisible ? '' : 'hide'}`} onMouseLeave={handleMouseLeave} onMouseEnter={handleMouseEnter}>
 
-       <SearchBar onSearch={onSearch}/>
+       <SearchBar onSearch={onSearch} loading={loadings}/>
 
         <button onClick={logoutClick}>
             Pagina Principal

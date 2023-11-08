@@ -50,7 +50,6 @@
     width: '300px';
     height: '200px';
     background-image: url('../estilos/pxfuel.jpg');
-    background-color: rgba(255, 255, 255, 0.5);
     background-blend-mode: lighten;
     background-size:contain;
     border-radius: 20px;
@@ -180,5 +179,8 @@
 
 .genre.Card {
     background-color: rgba(100,149,237 ,0.8); /* Azul maíz medio */
+}
+.genre.terror{
+    background-color: rgba(3, 3, 3, 0.8)
 }
 

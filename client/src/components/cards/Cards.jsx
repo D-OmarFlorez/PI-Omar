@@ -1,7 +1,7 @@
 import Card from "../card/Card";
 import "./Cards.css";
 
-const Cards = ({ Videogames, onClose, onCardClick, showCloseButton, deleteGame }) => {
+const Cards = ({ Videogames, onClose, onCardClick, showCloseButton, deleteGame, loadings }) => {
   Videogames ? Videogames : [];
   
 
@@ -27,6 +27,7 @@ const Cards = ({ Videogames, onClose, onCardClick, showCloseButton, deleteGame }
                 onClose={onClose}
                 onCardClick={onCardClick}
                 deleteGame={deleteGame}
+                loadings={loadings}
               />
             </div>
           );
@@ -48,6 +49,7 @@ const Cards = ({ Videogames, onClose, onCardClick, showCloseButton, deleteGame }
                 onClose={onClose}
                 onCardClick={onCardClick}
                 deleteGame={deleteGame}
+                loadings={loadings}
               />
             </div>
         )

@@ -17,6 +17,7 @@ const HomePage = () => {
             <h1>Accede a la base de datos de Videojuegos mas grande del mundo</h1>
             <h3>busca tu juego favorito desde la barra de navegacion, o filtralos por tu plataforma o genero favoritos</h3>
             <br></br>
+           
             <h1 className='1'>dale un vistazo a las principales noticias y reportajes del la cultura geek y la cultura gamer solo por SYFY</h1>
             <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?si=Y7qtT3DdfDmgpguw&amp;list=PL6Cen8nMa4HgUgt9KDOZFQmiS_HZ352Ok" title="Noticias Gamer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" className='video' allowfullscreen></iframe>
        <h2>Foros de videojuegos</h2>

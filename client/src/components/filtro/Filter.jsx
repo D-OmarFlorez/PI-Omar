@@ -3,18 +3,23 @@ import axios from "axios";
 import Card from "../card/Card";
 import './filter.css'
 import { useDispatch } from "react-redux";
-import { loadVideogames } from "../../redux/actions";
+import { loadVideogames, loading } from "../../redux/actions";
+import { useLocation } from "react-router-dom";
 
-const GameList = ({onCardClick }) => {
+const GameList = ({onCardClick, loadings }) => {
     const [games, setGames] = useState([]);
     const dispatch = useDispatch()
+    const pathname = useLocation()
     const [selectedGenre, setSelectedGenre] = useState("");
     const [selectedRating, setSelectedRating] = useState("");
     const [selectedPlatform, setSelectedPlatform] = useState("");
     const [selectedClass, setSelectedClass]= useState("")
     const [currentUrl, setCurrentUrl] = useState("http://localhost:3001/videogames");
     const [prevPageUrl, setPrevPageUrl] = useState("");
-   
+    const [pag, setPag] = useState(1)
+   console.log(currentUrl);
+   console.log(prevPageUrl);
+   console.log(pag);
     useEffect(() => {
         if (currentUrl) {
           axios(currentUrl)
@@ -27,6 +32,7 @@ const GameList = ({onCardClick }) => {
               dispatch(loadVideogames(response.data.results))
               if(currentUrl !== response.config.url){
                 setCurrentUrl(response.data.next)
+                
               }
             }
           })
@@ -35,20 +41,27 @@ const GameList = ({onCardClick }) => {
           });
         }
       }, [currentUrl]);
-      const next = () =>{
-        axios('http://localhost:3001/videogames/next')
+      const next = (pag) =>{
+       
+        axios(`http://localhost:3001/videogames/next/${pag}`)
         .then((response)=>{
-            setCurrentUrl(response.data)
+            setCurrentUrl(response.data.nextpage)
+            setPrevPageUrl(response.data.prevPage)
+            setPag(pag+1)
           })
           .catch((error)=>{
             throw Error (error,'no se pudo traer el link')
           })
-      }
+        
+              }
+
       const back = ()=>{
-        setPrevPageUrl(currentUrl)
         axios(prevPageUrl)
         .then ((response)=>{
-          setCurrentUrl(response.data)
+          setCurrentUrl(response.config.url)
+          setPrevPageUrl(response.data.previous)
+         
+          setPag(pag-1)
         })
         .catch((error)=>{
           throw Error (error,'no se pudo traer el link')
@@ -169,7 +182,7 @@ const GameList = ({onCardClick }) => {
 {prevPageUrl && (
   <button onClick={back}>atras</button>
 )}
-<button onClick={next}>adelante</button>
+<button onClick={()=>{ next(pag)}}>adelante</button>
         </div>
 );
   }

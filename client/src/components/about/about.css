@@ -39,13 +39,27 @@ font-family: 'strasua', Arial, Helvetica, sans-serif;
   .flotante{
     z-index: 1;
     font-size: 28px;
-    width: 400px;
+    width: 500px;
     max-width: 800px;
     height: auto;
     position: absolute;
     transform: translateX(70%);
     border: 12px solid transparent;
     border-image: url(https://i.pinimg.com/564x/b9/49/91/b94991e584565d4acdc66bdfbd7e0030.jpg) 20 round; 
-    background-image: url(https://i.pinimg.com/originals/51/3f/d6/513fd6f906290e7b87beb71b6cdbb92c.gif); 
+    background-image: url(https://i.pinimg.com/474x/e9/eb/1e/e9eb1e5eacfd37c22a4dc812b14d57a1.jpg); 
+    cursor: pointer;
+  }
+  .flotantes{
+    z-index: 1;
+    font-size: 18px;
+    width: 800px;
+    max-width: 800px;
+    height: auto;
+    position: absolute;
+    transform: translateX(20%);
+    border: 12px solid transparent;
+    border-image: url(https://i.pinimg.com/564x/b9/49/91/b94991e584565d4acdc66bdfbd7e0030.jpg) 20 round; 
+    background-image: url(https://i.pinimg.com/originals/fe/42/3f/fe423f30f7b65b287562607820d3ad43.gif); 
+    background-size: cover;
     cursor: pointer;
   }
