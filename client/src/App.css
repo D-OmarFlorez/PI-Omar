@@ -5,6 +5,11 @@
   text-align: center;
 }
 
+.App{
+  border: 10px solid transparent;
+  border-image: url('https://i.pinimg.com/originals/24/3f/89/243f89252a505b0e446f89403976a70f.gif') 30 round;
+
+}
 .updatediv{
   background-color: black;
   background-image: -moz-linear-gradient rgba(85, 8, 230, 0.8);

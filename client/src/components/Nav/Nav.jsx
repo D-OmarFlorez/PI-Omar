@@ -1,5 +1,5 @@
 import SearchBar from "../searchBar/SearchBar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
 import {Link, useNavigate} from "react-router-dom"
 import axios from "axios"
@@ -7,7 +7,7 @@ import './nav.css'
 /**components */
 import PostForm from "../post/Post";
 
-const Nav =({onSearch, limpiarHome, mostrarAbout, getGames}) =>{
+const Nav =({onSearch, limpiarHome, playaudio}) =>{
 
     const [confirm, setConfirm] = useState (false);
     const [randomGame, setRandomGame] = useState(null);
@@ -17,6 +17,7 @@ const Nav =({onSearch, limpiarHome, mostrarAbout, getGames}) =>{
 
     const Logout = () =>{
         navigate('/');
+        playaudio()
     }
     const logoutClick = () =>{
         setConfirm(true);
@@ -27,15 +28,23 @@ const Nav =({onSearch, limpiarHome, mostrarAbout, getGames}) =>{
 
     const handleShowForm=()=>{
         setShowForm(!showForm)
+        playaudio()
     }
     const principal = ()=>{
         navigate('/home')
+        playaudio()
     }
     const filter = () =>{
         navigate('/filter')
+        playaudio()
     }
     const myGames = () =>{
         navigate('/gamesdb')
+        playaudio()
+    }
+    const about = ()=>{
+        navigate('/about')
+        playaudio()
     }
     const random = async ()=>{
     try{
@@ -51,21 +60,47 @@ const Nav =({onSearch, limpiarHome, mostrarAbout, getGames}) =>{
 
     }
 }
+let timeoutId;
+
+const closeNav = () => {
+  timeoutId = setTimeout(() => {
+    SetNavVisible(false);
+  }, 4000);
+};
+
+const cancelCloseNav = () => {
+  clearTimeout(timeoutId);
+};
+
+useEffect(() => {
+  closeNav(); 
+  return () => {
+    clearTimeout(timeoutId);
+  };
+}, []);
+
+const handleMouseEnter= ()=>{
+    cancelCloseNav();
+}
+const handleMouseLeave = () =>{
+    closeNav()
+}
 return(
     <div>   
-         <button className="toggle-nav" onClick={() => SetNavVisible(!navVisible)}>
+         <button className="toggle-nav" onClick={() =>{ SetNavVisible(!navVisible); playaudio()}}
+        >
             {navVisible ? '☰' : '☰'}
         </button>
          <div>
     {navVisible &&
-        <nav className={`navBar ${navVisible ? '' : 'hide'}`}>
+        <nav className={`navBar ${navVisible ? '' : 'hide'}`} onMouseLeave={handleMouseLeave} onMouseEnter={handleMouseEnter}>
 
        <SearchBar onSearch={onSearch}/>
 
         <button onClick={logoutClick}>
             Pagina Principal
         </button>
-        <button onClick={filter}>Genres</button>
+        <button onClick={filter}>search</button>
         <button onClick={principal}>volver a inicio</button>
         {confirm&&(
             <div onClick={salirConfirm} style={{borderRadius:"30px", position: 'fixed',color:'black', top: '30%', left: '50%', right: 0,width:'50%', height:'20%', bottom: 0, backgroundColor: 'rgba(225,275,214,0.9)', transform:"translate(-50%, -50%)", overflow:"auto", border:" 4px solid black"}}>
@@ -80,6 +115,7 @@ return(
         </button>
         <button onClick={myGames}>MyGames</button>
         <button onClick={limpiarHome}>limpiar todo</button>
+        <button onClick={about}>Acerca de</button>
         </nav>
 }
         {showForm && (

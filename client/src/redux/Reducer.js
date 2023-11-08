@@ -5,7 +5,9 @@ import {
     MOSTRAR_FORM,
     REMOVE_VIDEOGAME,
     UPDATE_GAME,
-    SEARCH_GAMES
+    SEARCH_GAMES,
+    LOAD_VIDEOGAMES,
+    DROP_ID
     
 } from "./ActionsType"
 const initialState = {
@@ -13,9 +15,11 @@ const initialState = {
     videogames: [],
     gameData: null,
     games:[],
-    showForm: false
+    showForm: false,
+    videogamesid:{}
 }
 export const reducer = (state= initialState, action)=>{
+    
     switch (action.type){
         case REMOVE_VIDEOGAME:
             return{
@@ -30,6 +34,7 @@ export const reducer = (state= initialState, action)=>{
                     videogames: []
                 }
             case MOSTRAR_FORM:
+                console.log('hola');
                 return{
                     ...state,
                     showForm: !state.showForm
@@ -55,6 +60,16 @@ export const reducer = (state= initialState, action)=>{
                   ...state,
                   videogames: action.payload,
                 }
+                case LOAD_VIDEOGAMES:
+                    return{
+                    ...state,
+                    videogames: action.payload    
+                    }
+                case DROP_ID:
+                    return{
+                        ...state,
+                        videogamesid: action.payload
+                    }
                 default:
                     return state;
                 

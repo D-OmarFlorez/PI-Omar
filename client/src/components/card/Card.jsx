@@ -9,7 +9,6 @@ const Card =({ onClose, videogame, onCardClick, deleteGame}  ) => {
  const [currentImage, setCurrentImage] = useState(videogame.background_image);
  const [imageIndex, setImageIndex] = useState(0);
  const [intervalId, setIntervalId] = useState(null);
-
  const handleMouseEnter = () => {
    if (videogame.short_screenshots && videogame.short_screenshots.length > 0) {
        const id = setInterval(() => {
@@ -38,7 +37,6 @@ const handleMouseLeave = () => {
  
  const handleButton = (videogame)=>{
    if(isNaN(videogame.id)){
-      console.log();
    deleteGame()
    }
  }
@@ -48,13 +46,12 @@ const handleMouseLeave = () => {
     onCardClick(videogame?.id)
  }
  const genreClass = videogame?.genres[0]?.name;
-   console.log(genreClass);
    
     return (
        
        
        <div>
-         <button onClick={() => {onClose(videogame?.id)}}>❌</button>
+         <button className="Xbutton" onClick={() => {onClose(videogame?.id)}}>❌</button>
 
           <div className='gameInfo'>
              
@@ -67,6 +64,7 @@ const handleMouseLeave = () => {
          <div className="caja">
           <h2 className="cuerpoCarta">{videogame?.name}</h2>
           </div>
+          <br/>
           {!isNaN(videogame.id) ? ( 
           <img className="cartaJpg" src={currentImage} alt = {videogame?.name} /> 
           ) : (        

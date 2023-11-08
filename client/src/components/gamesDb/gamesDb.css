@@ -1,4 +1,7 @@
-
+@font-face {
+  font-family: 'space';
+  src: url('../estilos/space.ttf');
+}
 .updatediv{
     background-color: black;
     background-image: -moz-linear-gradient rgba(85, 8, 230, 0.8);
@@ -28,9 +31,10 @@
   }
   .imagenDb{
     height: 300px;
-    width: auto;
-    padding-left: 8%;
+    width: max-content;
+    padding-left: 0;
   }
+
   .close-button {
     position: relative;
     width: 30px;
@@ -71,4 +75,7 @@
   .moveButton{
     position: absolute;
     padding-left: 150px;
+  }
+  .P{
+    font-family: 'space' cursive, Arial, Helvetica, sans-serif;
   }

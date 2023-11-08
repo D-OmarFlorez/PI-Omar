@@ -21,8 +21,9 @@
   color: hsl(309, 26%, 95%) ;
   background-color: rgb(0, 0, 0, 0.8);
   font-size:medium;
-  width: 500px;
+  width: 550px;
   transition: box-shadow 0.5s;
+  
 }
 .carta:hover{
  box-shadow: 0 0 15px #00d50480;
@@ -98,7 +99,7 @@
   .genre {
     transition: opacity 0.3s ease;
     opacity: 1;
-    border-radius: 10px; 
+    border-radius: 5% 18%; 
 }
 
 .genre:hover {

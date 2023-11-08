@@ -2,8 +2,12 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './post.css'
 import validatePost from './validation'
+import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const PostForm = ({id, onClose}) => {
+  const {pathname} = useLocation();
+  const games = useSelector(state=> state.games)
   const [gameData, setGameData] = useState({
     name: '',
     image:'',
@@ -13,6 +17,7 @@ const PostForm = ({id, onClose}) => {
     rating: 0,
     genreNames: []
   });
+  console.log(gameData);
   const [errors, setErrors]= useState({})
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
@@ -68,7 +73,9 @@ const PostForm = ({id, onClose}) => {
       try {
         
       axios.post('http://localhost:3001/videogames', gameData)
-        .then(response => console.log(response.data))
+      
+        .then(response => console.log(response.data.videogames))
+        
         alert('videojuego creado con exito')
         .catch(error => console.error('Error:', error));
       } catch (error) {
@@ -109,7 +116,7 @@ const PostForm = ({id, onClose}) => {
         Nombre:
       </label>
         <input type="text" name="name" className='formControl' value={gameData.name} onChange={handleChange} />
-      
+      {errors.name && <p className='error'>{errors.name}</p>}
 </div>
       <div className='divGeneral'>
         <label className='labelGeneral'>
@@ -121,7 +128,7 @@ const PostForm = ({id, onClose}) => {
       <label className="labelGeneral">
         Descripción:
         <textarea name="description" value={gameData.description} onChange={handleChange} />
-        {errors.description && <p>{errors.description}</p>}
+        {errors.description && <p className='error'>{errors.description}</p>}
       </label>
 </div>
 <hr style={{ 
@@ -133,7 +140,7 @@ const PostForm = ({id, onClose}) => {
       <label className="labelGeneral">
         Fecha de lanzamiento:
         <input type="date" name="releaseDate" className='formControl' value={gameData.releaseDate} onChange={handleChange} />
-        {errors.releaseDate && <p>{errors.releaseDate}</p>}
+        {errors.releaseDate && <p className='error'>{errors.releaseDate}</p>}
       </label>
 </div>
 <div className='divGeneral'>
@@ -141,7 +148,7 @@ const PostForm = ({id, onClose}) => {
   Géneros:
   <button onClick={toggleDropdown}>select</button>
   <div className={`select-wraper ${isDropdownVisible ? 'open' : ''}`}>
-  <select multiple={true} name="genreNames" onChange={handleChangeGenre}>
+  <select className='arreglo' multiple={true} name="genreNames" onChange={handleChangeGenre}>
     <option value="Action">Action</option>
     <option value="Casual">Casual</option>
     <option value="Adventure">Adventure</option>
@@ -162,7 +169,7 @@ const PostForm = ({id, onClose}) => {
     <option value="Educational">Educational</option>
     <option value="Card">Card</option>
   </select>
-  {errors.genreNames && <p>{errors.genreNames}</p>}
+  {errors.genreNames && <p className='error'>{errors.genreNames}</p>}
   </div>
 </label>
 </div>
@@ -176,7 +183,7 @@ const PostForm = ({id, onClose}) => {
         Plataformas:
         <button onClick={toggleDropdown}>select</button>
         <div className={`select-wraper ${isDropdownVisible ? 'open' : ''}`}>
-        <select multiple={true} name="platforms" onChange={handleChange}>
+        <select className='arreglo' multiple={true} name="platforms" onChange={handleChange}>
           <option value="xbox">Xbox</option>
           <option value="PS2">PS2</option>
           <option value="Linux">Linux</option>
@@ -194,7 +201,7 @@ const PostForm = ({id, onClose}) => {
           <option value="Web">Web</option>
           
         </select>
-        {errors.platforms && <p>{errors.platforms}</p>}
+        {errors.platforms && <p className='error'>{errors.platforms}</p>}
         </div>
       </label >
 </div>
@@ -216,13 +223,16 @@ const PostForm = ({id, onClose}) => {
             </label>
           );
         })}
-        {errors.rating && <p>{errors.rating}</p>}
+        {errors.rating && <p className='error'>{errors.rating}</p>}
       </label>
       </div>
 <div className="divGeneral">
-      <button type ="button"  className='btn' onClick={handleUpdate}>Actualizar</button>
-      <button type="submit" className='btn'>Enviar</button>
-      </div>
+  {pathname !== '/gamesdb' || games == 0 ? (
+    <button type="submit" className='btn' onClick={handleSubmit} disabled={Object.keys(errors).length !== 0 || !gameData.name || !gameData.image || !gameData.description || !gameData.platforms.length || !gameData.releaseDate || !gameData.rating || !gameData.genreNames.length}>Enviar</button>
+    ): (
+    <button type ="button"  className='btn' onClick={handleUpdate} >Actualizar</button>
+  ) 
+}</div>
       
     </form>
   );

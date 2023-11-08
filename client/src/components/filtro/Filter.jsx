@@ -2,71 +2,90 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Card from "../card/Card";
 import './filter.css'
+import { useDispatch } from "react-redux";
+import { loadVideogames } from "../../redux/actions";
 
 const GameList = ({onCardClick }) => {
     const [games, setGames] = useState([]);
+    const dispatch = useDispatch()
     const [selectedGenre, setSelectedGenre] = useState("");
     const [selectedRating, setSelectedRating] = useState("");
     const [selectedPlatform, setSelectedPlatform] = useState("");
     const [selectedClass, setSelectedClass]= useState("")
-
-    const [nextPageUrl, setNextPageUrl] = useState("");
     const [currentUrl, setCurrentUrl] = useState("http://localhost:3001/videogames");
-    const [currentPage, setCurrentPage] = useState(1);
     const [prevPageUrl, setPrevPageUrl] = useState("");
-    const [prevPageNumber, setPrevPageNumber] = useState(null);
-
+   
     useEffect(() => {
         if (currentUrl) {
-            axios(currentUrl)
-              .then((response) => {
-                setGames(response.data.videogames);
-                if(response.data.nextPage){
-                    if (currentUrl !== response.data.nextPage) {
-                      setPrevPageUrl(currentUrl);
-                  }
-                  setNextPageUrl(response.data.nextPage);
-                  
-                } 
-            })
-              .catch((error) => {
-                console.error("Error al cargar los juegos", error);
-              });
+          axios(currentUrl)
+          .then((response) => {
+            if(currentUrl == 'http://localhost:3001/videogames'){
+              setGames(response.data.videogames);
+              dispatch(loadVideogames(response.data.videogames))
+            }else{
+              setGames(response.data.results)
+              dispatch(loadVideogames(response.data.results))
+              if(currentUrl !== response.config.url){
+                setCurrentUrl(response.data.next)
+              }
+            }
+          })
+          .catch((error) => {
+            console.error("Error al cargar los juegos", error);
+          });
         }
       }, [currentUrl]);
-
+      const next = () =>{
+        axios('http://localhost:3001/videogames/next')
+        .then((response)=>{
+            setCurrentUrl(response.data)
+          })
+          .catch((error)=>{
+            throw Error (error,'no se pudo traer el link')
+          })
+      }
+      const back = ()=>{
+        setPrevPageUrl(currentUrl)
+        axios(prevPageUrl)
+        .then ((response)=>{
+          setCurrentUrl(response.data)
+        })
+        .catch((error)=>{
+          throw Error (error,'no se pudo traer el link')
+        })
+      }
       const onCloses = (id) => {
-        const videogameFilter = games.filter((videogame) => {
+        const videogameFilter = games((videogame) => {
           return videogame.id !== id; // Filtrar personajes cuyo ID no coincida
         });
         setGames(videogameFilter);
       }
-      const filteredGames = games.filter((game) => {
-
-        const genero= selectedGenre ? (game.genres && game.genres?.some ((genre)=> genre.name === selectedGenre)) : true;
-
-        const rating = selectedRating ? Math.floor(game?.rating) == selectedRating  : true;
-        
-        let plataforms
-        let platform
-        if(game.platforms){
-          if (isNaN(game.id)){
-            plataforms = game.platforms
-            platform = selectedPlatform ? plataforms?.some((e)=> e == selectedPlatform) : true
-          }else{
-          plataforms = game.platforms.map(value => value.platform)
-           platform = selectedPlatform ? plataforms?.some((plat)=>plat.name == selectedPlatform) : true;
-          
-        }
-      }
-        
-        const clasificacion = selectedClass ? game.esrb_rating?.name == selectedClass : true;
-        return genero && platform && rating && clasificacion
-      });
-   
-    
+     
+      let filteredGames = []
+      if (games && games.length > 0) {
+       filteredGames = games.filter((game) => {
+        const genero = selectedGenre ? (game.genres && game.genres.some(genre => genre.name === selectedGenre)) : true;
+        const rating = selectedRating ? Math.floor(game.rating) == selectedRating : true;
+        let plataforms;
+        let platform;
+        let clasificacion
+        if (!isNaN(game.id)) {
+          plataforms = game.platforms.map(value => value.platform);
+          platform = selectedPlatform ? plataforms.some(plat => plat.name == selectedPlatform) : true;
+          clasificacion = selectedClass ? game.esrb_rating.name == selectedClass : true;
+        } else {
+          plataforms = game.platforms;
+              platform = selectedPlatform ? plataforms.includes(selectedPlatform) : true;             
+            }
+              
+              return genero && platform && rating && clasificacion;
+    });
+  }
+      
       return (
         <div className="colador">
+          <div className="navFilter">
+          <h1>Navega entre mas de 800.000 videojuegos, y explora cada uno de ellos!!</h1>
 
         <select value={selectedRating} onChange={(e) => setSelectedRating(e.target.value)}>
           <option value="">Todos los ratings</option>
@@ -127,7 +146,7 @@ const GameList = ({onCardClick }) => {
             <option value="Educational">Educational</option>
             <option value="Card">Card</option>
           </select>
-
+          </div>
           <div className="box" >
   {filteredGames.map((game, index) => {
     const key= game.id? game.id : `random${index}`
@@ -147,25 +166,10 @@ const GameList = ({onCardClick }) => {
     </div>
   )})}
 </div>
-{prevPageNumber && <button onClick={() => {
-  const prevUrl = `https://api.rawg.io/api/games?key=bf3907b002f9450c8a1ae32f7f532d03&page=${prevPageNumber}`;
-  setCurrentUrl(prevUrl);
-}}>🡸</button>}
-
-{[...Array(10)].map((_, i) => {
-        const pageNumber = currentPage + i;
-        return (
-          <button key={pageNumber} onClick={() => {
-            // Actualiza prevPageNumber antes de cambiar currentPage
-            setPrevPageNumber(currentPage);
-            setCurrentPage(pageNumber);
-            const newUrl = `https://api.rawg.io/api/games?key=bf3907b002f9450c8a1ae32f7f532d03&page=${pageNumber}`;
-            setCurrentUrl(newUrl);
-          }}>
-            {pageNumber}
-          </button>
-        );
-      })}
+{prevPageUrl && (
+  <button onClick={back}>atras</button>
+)}
+<button onClick={next}>adelante</button>
         </div>
 );
   }

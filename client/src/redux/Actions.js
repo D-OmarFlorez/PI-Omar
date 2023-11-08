@@ -8,6 +8,8 @@ import {
     DELETE_GAME,
     UPDATE_GAME,
     SEARCH_GAMES,
+    LOAD_VIDEOGAMES,
+    DROP_ID
     
 } from "./ActionsType"
 import axios from 'axios'
@@ -17,13 +19,14 @@ export const searchGamesSuccess = (games) =>({
     payload: games
 })
 export const searchGames = (idVideogames) => {
+  
     return async (dispatch) => {
       try {
         let url = 'http://localhost:3001/videogames';
         let response;
-  
         if(idVideogames.length === 0){
           response = await axios.get(url);
+          
         }
         else if (!isNaN(idVideogames)){
           response = await axios.get(`${url}/${idVideogames}`);
@@ -37,16 +40,38 @@ export const searchGames = (idVideogames) => {
         if(!isNaN(idVideogames)){
         dispatch(searchGamesSuccess(response.data.videogames));
         }else{
-        dispatch(searchGamesSuccess(response.data)); 
+          
+        dispatch(searchGamesSuccess(response.data.flat())); 
+        
         }
       } catch (error) {
         console.error('Error al buscar los juegos', error);
       }
     };
   };
-
+export const dropIds= (obj)=>{
+  return {type: DROP_ID, payload: obj}
+}
+export const dropId = (id) =>{
+  return async(dispatch)=>{
+    try{
+  const response =await axios(`http://localhost:3001/videogames/${id}`)
+  if(!isNaN(id)){
+    dispatch(dropIds(response.data.videogames))
+  }else{
+    dispatch(dropIds(response.data))
+  }
+    }
+    catch(error){
+      console.error(error);
+    }
+  }
+}
 export const removeVideogame = (id) => {
     return { type: REMOVE_VIDEOGAME, payload: id }
+}
+export const loadVideogames = (games)=>{
+  return {type: LOAD_VIDEOGAMES, payload: games}
 }
 
 export const filterGames = (genre)=>{
@@ -68,9 +93,9 @@ export const getGamesSuccess = (games)=>{
         payload: games
     }
 }
-export const getGame = () => {
-    return async (dispatch) => {
-      try {
+export const getGame = async (dispatch) => {
+
+    try {
         const response = await axios.get('http://localhost:3001/videogames/MyGames');
         
         dispatch(getGamesSuccess(response.data));
@@ -78,7 +103,7 @@ export const getGame = () => {
         console.error('Error al obtener los juegos', error);
       }
     };
-  };
+  
 
 export const deleteGameSuccess = (id) => ({
     type: DELETE_GAME,

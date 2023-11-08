@@ -12,13 +12,16 @@ const GetId = require('../controllers/GetId.js')
 const deleteGame = require('../controllers/DeleteGame.js')
 const UpdateGame = require ('../controllers/UpdateVideogame.js')
 const DBGames = require('../controllers/getDbGames.js')
+const NextPages =require('../controllers/getNextPage.js')
 //const {API_KEY} = process.env
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const router = Router();
 
 /*rutas*/
-// show all games
+
+router.get('/videogames/next', NextPages)
+
 router.get('/videogames',GetVideogames);
 
 router.get('/videogames/name', GetName);
