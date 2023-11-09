@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Card from "../card/Card";
 import './filter.css'
-import { useDispatch } from "react-redux";
-import { loadVideogames, loading } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { loadVideogames, loading, searchGames } from "../../redux/actions";
 import { useLocation } from "react-router-dom";
 
 const GameList = ({onCardClick, loadings }) => {
     const [games, setGames] = useState([]);
     const dispatch = useDispatch()
-    const pathname = useLocation()
     const [selectedGenre, setSelectedGenre] = useState("");
     const [selectedRating, setSelectedRating] = useState("");
     const [selectedPlatform, setSelectedPlatform] = useState("");
@@ -17,16 +16,15 @@ const GameList = ({onCardClick, loadings }) => {
     const [currentUrl, setCurrentUrl] = useState("http://localhost:3001/videogames");
     const [prevPageUrl, setPrevPageUrl] = useState("");
     const [pag, setPag] = useState(1)
-   console.log(currentUrl);
-   console.log(prevPageUrl);
-   console.log(pag);
+  //  console.log(game);
+  
     useEffect(() => {
         if (currentUrl) {
           axios(currentUrl)
           .then((response) => {
             if(currentUrl == 'http://localhost:3001/videogames'){
-              setGames(response.data.videogames);
               dispatch(loadVideogames(response.data.videogames))
+              setGames(response.data.videogames);
             }else{
               setGames(response.data.results)
               dispatch(loadVideogames(response.data.results))
@@ -73,28 +71,35 @@ const GameList = ({onCardClick, loadings }) => {
         });
         setGames(videogameFilter);
       }
-     
       let filteredGames = []
+      console.log(filteredGames);
       if (games && games.length > 0) {
-       filteredGames = games.filter((game) => {
-        const genero = selectedGenre ? (game.genres && game.genres.some(genre => genre.name === selectedGenre)) : true;
+        filteredGames = games.filter((game) => {
+         
         const rating = selectedRating ? Math.floor(game.rating) == selectedRating : true;
-        let plataforms;
+        let genero
+        let plataforms
         let platform;
-        let clasificacion
+        let clasificacion;
         if (!isNaN(game.id)) {
+          genero = selectedGenre ? (game.genres && game.genres.some(genre => genre.name === selectedGenre)) : true;
           plataforms = game.platforms.map(value => value.platform);
           platform = selectedPlatform ? plataforms.some(plat => plat.name == selectedPlatform) : true;
-          clasificacion = selectedClass ? game.esrb_rating.name == selectedClass : true;
+          clasificacion = selectedClass ? game.esrb_rating?.name == selectedClass : true;
         } else {
           plataforms = game.platforms;
-              platform = selectedPlatform ? plataforms.includes(selectedPlatform) : true;             
+          platform = selectedPlatform ? plataforms.some(plat=> plat == selectedPlatform) : true; 
+          let genre = game.genres.flat()  
+          let gender = genre.map(a => a.name)
+          genero= selectedGenre ? gender.some(gen=> gen == selectedGenre) : true; 
+          clasificacion = game.rating 
             }
               
-              return genero && platform && rating && clasificacion;
-    });
-  }
-      
+         
+            console.log(platform, genero);
+            return genero && platform && rating && clasificacion;
+          });
+        }
       return (
         <div className="colador">
           <div className="navFilter">
