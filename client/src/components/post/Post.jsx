@@ -19,24 +19,30 @@ const PostForm = ({id, onClose}) => {
   });
   const [errors, setErrors]= useState({})
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-
+console.log(errors);
   const toggleDropdown = () => {
     setIsDropdownVisible(!isDropdownVisible);
   };
  
   const handleChange = (event) => {
+    let newGameData;
+  
     if (event.target.name === 'platforms') {
       const selectedPlatforms = Array.from(event.target.selectedOptions, option => option.value);
-      setGameData({
+      newGameData = {
         ...gameData,
         platforms: selectedPlatforms
-      });
+      };
     } else {
-      setGameData({
+      newGameData = {
         ...gameData,
         [event.target.name]: event.target.value
-      });
+      };
     }
+    setGameData(newGameData);
+    const validationErrors = validatePost(newGameData);
+ 
+    setErrors(validationErrors);
   };
   
 
@@ -110,7 +116,6 @@ const PostForm = ({id, onClose}) => {
   return (
     <div>
     <form onSubmit={handleSubmit} className='form'>
-      <button onClick={onClose}></button>
     
 <div className="divGeneral">
       <label className="labelGeneral">
@@ -147,7 +152,7 @@ const PostForm = ({id, onClose}) => {
 </div>
 <div className='divGeneral'>
 <label className="labelGeneral" >
-  <br />
+  <br /><br/>
   Géneros:
   <button type='button' onClick={toggleDropdown}>select</button>
   <div className={`select-wraper ${isDropdownVisible ? 'open' : ''}`}>
@@ -173,8 +178,9 @@ const PostForm = ({id, onClose}) => {
     <option value="Educational">Educational</option>
     <option value="Card">Card</option>
   </select>
-  {errors.genreNames && <p className='error'>{errors.genreNames}</p>}
   </div>
+  {errors.genreNames && <p className='errore'>{errors.genreNames}</p>}
+ 
 </label>
 <hr/>
 </div>
@@ -202,8 +208,8 @@ const PostForm = ({id, onClose}) => {
           <option value="Web">Web</option>
           
         </select>
-        {errors.platforms && <p className='error'>{errors.platforms}</p>}
         </div>
+        {errors.platforms && <p className='errore'>{errors.platforms}</p>}
       </label >
       <hr/>
 </div>
@@ -230,7 +236,7 @@ const PostForm = ({id, onClose}) => {
       </div>
 <div className="divGeneral">
   {pathname !== '/gamesdb' || games == 0 ? (
-    <button type="submit" className='btn' disabled={Object.keys(errors).length !== 0 || !gameData.name || !gameData.image || !gameData.description || !gameData.platforms.length || !gameData.releaseDate || !gameData.rating || !gameData.genreNames.length}>Enviar</button>
+    <button className='btn' disabled={Object.keys(errors).length > 0}>Enviar</button>
     ): (
     <button type ="button"  className='btn' onClick={handleUpdate} >Actualizar</button>
   ) 

@@ -66,13 +66,13 @@ const GameList = ({onCardClick, loadings }) => {
         })
       }
       const onCloses = (id) => {
+        console.log(id);
         const videogameFilter = games((videogame) => {
-          return videogame.id !== id; // Filtrar personajes cuyo ID no coincida
+          return videogame.id !== id;
         });
         setGames(videogameFilter);
       }
       let filteredGames = []
-      console.log(filteredGames);
       if (games && games.length > 0) {
         filteredGames = games.filter((game) => {
          
@@ -96,7 +96,6 @@ const GameList = ({onCardClick, loadings }) => {
             }
               
          
-            console.log(platform, genero);
             return genero && platform && rating && clasificacion;
           });
         }

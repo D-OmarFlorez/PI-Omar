@@ -60,6 +60,35 @@
     background-color: blue;
     box-shadow: rgb(226, rgb(101, 255, 101), rgb(75, 75, 255), 0.7);
 }
+.btn:disabled {
+    background-color: #009dff;
+    opacity: 0.6;
+    cursor: not-allowed;
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+.btn:disabled:hover {
+    background-color: #009dff;
+    box-shadow: none;
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+}
+
+@keyframes shake {
+    10%, 90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    20%, 80% {
+      transform: translate3d(2px, 0, 0);
+    }
+    30%, 50%, 70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+    40%, 60% {
+      transform: translate3d(4px, 0, 0);
+    }
+}
 .hidden-radio{
     display: none;
 }
@@ -79,6 +108,12 @@
 .error{
     color: red;
     font-size: 12px;
+}
+.errore{
+    color: red;
+    font-size: 14px;
+    transform: translateY(-20px);
+    background-color: aliceblue;
 }
 
 textarea {

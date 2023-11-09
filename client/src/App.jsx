@@ -29,10 +29,10 @@ const dispatch = useDispatch()
 const navigate = useNavigate()
 const {pathname} = useLocation();
 const [audio] =useState(new Audio(buttonclick))
+
 const playaudio=()=>{
 audio.play();
 };
-console.log(loadGif);
 const loadings = ()=>{
   dispatch(loading())
 }
@@ -49,6 +49,7 @@ const cerrarForm = () =>{
   dispatch(mostrarForm);
 };
 const onClose = (id) => {
+
  dispatch(removeVideogame(id));
 
 }; 

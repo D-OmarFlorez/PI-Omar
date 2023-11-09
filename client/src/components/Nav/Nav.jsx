@@ -114,8 +114,8 @@ return(
             
         <div className="form" >
             
-        <PostForm/>
         <button onClick={handleShowForm} className="close-button"></button>
+        <PostForm/>
 
         </div>
         )}

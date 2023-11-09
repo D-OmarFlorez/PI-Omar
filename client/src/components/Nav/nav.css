@@ -5,8 +5,10 @@
     padding-top: 20px;
     height: 30px;
     border: none;
+    transform: translateX(132px);
     background: none;
     cursor: pointer;
+
   }
   
   .close-button:before, .close-button:after {

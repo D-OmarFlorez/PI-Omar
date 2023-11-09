@@ -25,11 +25,19 @@ export const reducer = (state= initialState, action)=>{
     
     switch (action.type){
         case REMOVE_VIDEOGAME:
+            let newVideogames;
+            if (state.videogames.id == action.payload) {
+                newVideogames = []
+            } else {
+                newVideogames = state.videogames.filter(({id})=>{
+                    console.log(id);
+                    return id !== action.payload
+                });
+            }
             return{
                 ...state,
-                videogames: state.videogames.filter(({id})=>{
-                    return id !== action.payload
-                })
+                videogames: newVideogames
+            
             }
             case CLEAR_VIDEOGAMES:
                 return{
